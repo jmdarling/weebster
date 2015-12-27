@@ -17,14 +17,18 @@
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
+    <script src="js/animeListController.js"></script>
   </head>
   <body ng-app="weebster">
 
     <ion-pane>
       <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
+        <h1 class="title">weebster</h1>
       </ion-header-bar>
       <ion-content>
+        <ion-list ng-controller="animeListController">
+          <ion-item ng-repeat="libraryEntry in libraryEntries">{{libraryEntry.anime.title}}</ion-item>
+        </ion-list>
       </ion-content>
     </ion-pane>
   </body>
