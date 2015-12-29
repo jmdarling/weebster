@@ -27,7 +27,11 @@
       </ion-header-bar>
       <ion-content>
         <ion-list ng-controller="animeListController">
-          <ion-item ng-repeat="libraryEntry in libraryEntries">{{libraryEntry.anime.title}}</ion-item>
+          <ion-item class="item-thumbnail-left" ng-repeat="libraryEntry in libraryEntries">
+            <img ng-src="{{libraryEntry.anime.cover_image}}">
+            <h2>{{libraryEntry.anime.title}}</h2>
+            <p>{{libraryEntry.anime.alternate_title}}</p>
+          </ion-item>
         </ion-list>
       </ion-content>
     </ion-pane>

@@ -1,6 +1,6 @@
 (function() {
   function animeListController($scope, $http) {
-    $http.get('http://localhost:3000/users/coltex/library')
+    $http.get('https://weebster-server.herokuapp.com/users/coltex/library')
       .then(function(response) {
         $scope.libraryEntries = response.data;
       })
