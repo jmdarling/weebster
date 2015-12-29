@@ -27,6 +27,9 @@
       </ion-header-bar>
       <ion-content>
         <ion-list ng-controller="animeListController">
+
+          <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh"></ion-refresher>
+
           <ion-item class="item-thumbnail-left" ng-repeat="libraryEntry in libraryEntries">
             <img ng-src="{{libraryEntry.anime.cover_image}}">
             <h2>{{libraryEntry.anime.title}}</h2>
