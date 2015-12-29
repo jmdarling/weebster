@@ -1,6 +1,6 @@
 {
   "name": "weebster",
-  "app_id": "",
+  "app_id": "f8aafef2",
   "gulpStartupTasks": [
     "sass",
     "watch"
