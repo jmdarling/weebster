@@ -3,8 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
-
+    <title>Weebster</title>
 
     <!-- compiled css output -->
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -21,21 +20,7 @@
     <script src="js/services/sessionService.js"></script>
   </head>
   <body ng-app="weebster">
-
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">weebster</h1>
-      </ion-header-bar>
-      <ion-content>
-        <ion-list ng-controller="animeListController">
-          <ion-item class="item-avatar item-button-right" ng-repeat="libraryEntry in libraryEntries">
-            <img ng-src="{{libraryEntry.anime.cover_image}}">
-            <h2>{{libraryEntry.anime.title}}</h2>
-            <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
-            <button class="button button-positive" ng-click="incrementWatched(libraryEntry.anime.id)"><i class="icon ion-plus-round"></i></button>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-pane>
+    <ion-nav-bar></ion-nav-bar>
+    <ion-nav-view></ion-nav-view>
   </body>
 </html>
