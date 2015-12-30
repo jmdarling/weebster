@@ -27,13 +27,11 @@
       </ion-header-bar>
       <ion-content>
         <ion-list ng-controller="animeListController">
-
-          <ion-refresher pulling-text="Pull to refresh..." on-refresh="onRefresh"></ion-refresher>
-
-          <ion-item class="item-thumbnail-left" ng-repeat="libraryEntry in libraryEntries">
+          <ion-item class="item-avatar item-button-right" ng-repeat="libraryEntry in libraryEntries">
             <img ng-src="{{libraryEntry.anime.cover_image}}">
             <h2>{{libraryEntry.anime.title}}</h2>
-            <p>{{libraryEntry.anime.alternate_title}}</p>
+            <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
+            <button class="button button-positive" ng-click="incrementWatched(libraryEntry.anime.id)"><i class="icon ion-plus-round"></i></button>
           </ion-item>
         </ion-list>
       </ion-content>

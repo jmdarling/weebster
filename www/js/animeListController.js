@@ -17,6 +17,13 @@
             console.log(error);
           });
       }
+
+      $scope.incrementWatched = function (animeId) {
+        $http.post('https://weebster-server.herokuapp.com/libraryEntry/' + animeId, {
+          auth_token: '',
+          increment_episodes: true
+        })
+      }
   }
 
   angular.module('weebster').controller('animeListController', ['$scope', '$http', animeListController]);
