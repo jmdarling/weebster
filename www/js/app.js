@@ -7,6 +7,10 @@ app.config(function ($stateProvider, $urlRouterProvider) {
       url: '/list',
       templateUrl: 'templates/list.html'
     })
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html'
+    })
 
   $urlRouterProvider.otherwise('/list')
 })
