@@ -2,10 +2,10 @@
   <ion-content ng-controller="loginController">
     <ion-list>
       <ion-item class="item-input">
-        <input type="text" id="username" name="username" placeholder="Username" ng-model="form.username" required/>
+        <input type="text" id="username" name="username" placeholder="Username" ng-model="form.username" autocapitalize="none" required/>
       </ion-item>
       <ion-item class="item-input">
-        <input type="password" id="password" name="password" placeholder="Password" ng-model="form.password" required/>
+        <input type="password" id="password" name="password" placeholder="Password" ng-model="form.password" autocapitalize="none" required/>
       </ion-item>
     </ion-list>
     <button class="button button-block" ng-click="onSubmit()">Log In</button>
