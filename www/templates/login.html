@@ -2,12 +2,12 @@
   <ion-content ng-controller="loginController">
     <ion-list>
       <ion-item class="item-input">
-        <input type="text" id="username" name="username" placeholder="Username" ng-model="username"/>
+        <input type="text" id="username" name="username" placeholder="Username" ng-model="form.username" required/>
       </ion-item>
       <ion-item class="item-input">
-        <input type="password" id="password" name="password" placeholder="Password" ng-model="password"/>
+        <input type="password" id="password" name="password" placeholder="Password" ng-model="form.password" required/>
       </ion-item>
     </ion-list>
-    <button class="button button-block" ng-click="submit()">Log In</button>
+    <button class="button button-block" ng-click="onSubmit()">Log In</button>
   </ion-content>
 </ion-view>
