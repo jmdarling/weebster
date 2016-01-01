@@ -1,0 +1,12 @@
+<ion-view view-title="My Anime">
+  <ion-content ng-controller="animeListController">
+    <ion-list>
+      <ion-item class="item-avatar item-button-right" ng-repeat="libraryEntry in libraryEntries">
+        <img ng-src="{{libraryEntry.anime.cover_image}}">
+        <h2>{{libraryEntry.anime.title}}</h2>
+        <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
+        <button class="button button-positive" ng-click="incrementWatched(libraryEntry.anime.id)"><i class="icon ion-plus-round"></i></button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
