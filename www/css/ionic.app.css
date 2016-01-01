@@ -9703,3 +9703,9 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.login__logo {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  width: 60%; }

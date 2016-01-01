@@ -3,3 +3,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
+
+.login__logo {
+  display: block;
+  margin: 20px auto;
+  text-align: center;
+  width: 60%;
+}
