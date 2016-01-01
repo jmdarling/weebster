@@ -2,10 +2,12 @@
   <ion-content ng-controller="loginController">
     <img class="login__logo" src="img/weebster_logo.svg"/>
     <ion-list>
-      <ion-item class="item-input">
+      <ion-item class="item-input item-floating-label">
+        <span class="input-label">Username</span>
         <input type="text" id="username" name="username" placeholder="Username" ng-model="form.username" autocapitalize="none" required/>
       </ion-item>
-      <ion-item class="item-input">
+      <ion-item class="item-input item-floating-label">
+        <span class="input-label">Password</span>
         <input type="password" id="password" name="password" placeholder="Password" ng-model="form.password" autocapitalize="none" required/>
       </ion-item>
     </ion-list>
