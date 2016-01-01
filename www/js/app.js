@@ -4,7 +4,6 @@ var app = angular.module('weebster', ['ionic'])
 app.config(function ($stateProvider, $urlRouterProvider) {
   $stateProvider
     .state('list', {
-      cache: false,
       url: '/list',
       templateUrl: 'templates/list.html'
     })
