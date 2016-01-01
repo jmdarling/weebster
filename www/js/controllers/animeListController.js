@@ -1,11 +1,6 @@
 /* globals angular */
 (function () {
   function animeListController ($scope, $http, $state, sessionService) {
-    if (!sessionService.hasSession()) {
-      $state.go('login')
-      return
-    }
-
     $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library')
       .then(function (response) {
         $scope.libraryEntries = response.data

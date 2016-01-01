@@ -1,10 +1,6 @@
 /* global angular */
 (function () {
   function loginController ($scope, $http, $state, sessionService) {
-    if(sessionService.hasSession()) {
-      $state.go('list')
-    }
-
     $scope.form = {}
 
     $scope.onSubmit = function () {
