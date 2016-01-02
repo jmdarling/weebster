@@ -1,12 +1,17 @@
 <ion-view view-title="Log In">
   <ion-content ng-controller="loginController">
     <img class="login__logo" src="img/weebster_logo.svg"/>
+    <p class="assertive" ng-if="loginForm.errors.serverValidationError">{{loginForm.errors.serverValidationError}}</p>
     <ion-list>
-      <ion-item class="item-input">
-        <input type="text" id="username" name="username" placeholder="Username" ng-model="form.username" autocapitalize="none" required/>
+      <ion-item class="item-input item-floating-label">
+        <span class="input-label">Username</span>
+        <input autocapitalize="none" placeholder="Username" required type="text" ng-change="onUsernameChange()" ng-model="loginForm.data.username" />
+        <span class="assertive" ng-if="loginForm.errors.username">{{loginForm.errors.username}}</span>
       </ion-item>
-      <ion-item class="item-input">
-        <input type="password" id="password" name="password" placeholder="Password" ng-model="form.password" autocapitalize="none" required/>
+      <ion-item class="item-input item-floating-label">
+        <span class="input-label">Password</span>
+        <input autocapitalize="none" placeholder="Password" required type="password" ng-change="onPasswordChange()" ng-model="loginForm.data.password"/>
+        <span class="assertive" ng-if="loginForm.errors.password">{{loginForm.errors.password}}</span>
       </ion-item>
     </ion-list>
     <button class="button button-block" ng-click="onSubmit()">Log In</button>
