@@ -1,23 +1,43 @@
 /* global angular */
 (function () {
   function loginController ($scope, $http, $state, sessionService) {
-    $scope.form = {}
+    $scope.loginForm = {}
+    $scope.loginForm.data = {}
+    $scope.loginForm.errors = {}
+
+    $scope.onUsernameChange = function () {
+      // Remove validation errors if the user starts changing data
+      $scope.loginForm.errors.username = null
+    }
+
+    $scope.onPasswordChange = function () {
+      // Remove validation errors if the user starts changing data
+      $scope.loginForm.errors.password = null
+    }
 
     $scope.onSubmit = function () {
-      if ($scope.form.username == null || $scope.form.password == null) {
-        // TODO: Real validation.
+      if ($scope.loginForm.data.username == null) {
+        $scope.loginForm.errors.username = 'A username is required.'
+      }
+
+      if ($scope.loginForm.data.password == null) {
+        $scope.loginForm.errors.password = 'A password is required.'
+      }
+
+      if ($scope.loginForm.data.username == null || $scope.loginForm.data.password == null) {
+        return
       }
 
       $http.post('https://weebster-server.herokuapp.com/authenticate', {
-        username: $scope.form.username,
-        password: $scope.form.password
+        username: $scope.loginForm.data.username,
+        password: $scope.loginForm.data.password
       })
       .then(function (response) {
-        sessionService.startSession(response.data, $scope.form.username)
+        sessionService.startSession(response.data, $scope.loginForm.data.username)
         $state.go('list')
       })
       .catch(function () {
-        console.log('Auth failed')
+        $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
       })
     }
   }
