@@ -1,6 +1,6 @@
 /* globals angular */
 (function () {
-  function animeListController ($scope, $http, $state, sessionService) {
+  function animeListController ($scope, $http, $state, $ionicLoading, sessionService) {
     $scope.libraryStateOptions = [
       {
         id: 'all',
@@ -32,21 +32,33 @@
     $scope.selected.libraryState = $scope.libraryStateOptions[1]
 
     $scope.onSelectedLibraryStateChanged = function () {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      })
+
       $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library?status=' + $scope.selected.libraryState.id)
       .then(function (response) {
         $scope.libraryEntries = response.data
+        $ionicLoading.hide()
       })
       .catch(function (error) {
         console.log(error)
+        $ionicLoading.hide()
       })
     }
+
+    $ionicLoading.show({
+      template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    })
 
     $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library?status=' + $scope.selected.libraryState.id)
       .then(function (response) {
         $scope.libraryEntries = response.data
+        $ionicLoading.hide()
       })
       .catch(function (error) {
         console.log(error)
+        $ionicLoading.hide()
       })
 
     $scope.onRefresh = function () {
@@ -67,5 +79,5 @@
     }
   }
 
-  angular.module('weebster').controller('animeListController', ['$scope', '$http', '$state', 'sessionService', animeListController])
+  angular.module('weebster').controller('animeListController', ['$scope', '$http', '$state', '$ionicLoading', 'sessionService', animeListController])
 })()
