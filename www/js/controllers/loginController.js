@@ -1,6 +1,6 @@
 /* global angular */
 (function () {
-  function loginController ($scope, $http, $state, sessionService) {
+  function loginController ($scope, $state, dataService, sessionService) {
     $scope.loginForm = {}
     $scope.loginForm.data = {}
     $scope.loginForm.errors = {}
@@ -28,19 +28,17 @@
         return
       }
 
-      $http.post('https://weebster-server.herokuapp.com/authenticate', {
-        username: $scope.loginForm.data.username,
-        password: $scope.loginForm.data.password
-      })
-      .then(function (response) {
-        sessionService.startSession(response.data, $scope.loginForm.data.username)
-        $state.go('list')
-      })
-      .catch(function () {
-        $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
-      })
+      dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
+        .then(function (response) {
+          sessionService.startSession(response.data, $scope.loginForm.data.username)
+          $state.go('list')
+        })
+        .catch(function (error) {
+          console.log(error)
+          $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
+        })
     }
   }
 
-  angular.module('weebster').controller('loginController', ['$scope', '$http', '$state', 'sessionService', loginController])
+  angular.module('weebster').controller('loginController', ['$scope', '$state', 'dataService', 'sessionService', loginController])
 })()
