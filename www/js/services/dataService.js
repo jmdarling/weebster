@@ -1,3 +1,4 @@
+/* globals angular */
 (function () {
   function dataService ($http, $q, sessionService) {
     var uriBase = 'https://weebster-server.herokuapp.com/'
@@ -10,7 +11,7 @@
      */
     this.authenticateUser = function (username, password) {
       if (username == null || password == null) {
-        // TODO: Return a failure using $q
+        return $q.reject('The parameters "username" and "password" must not be null.')
       }
 
       var uri = uriBase + 'authenticate'
@@ -32,7 +33,7 @@
      */
     this.getUserLibrary = function (username, status) {
       if (username == null) {
-        // TODO: Return a failure using $q
+        return $q.reject('The parameter "username" must not be null.')
       }
 
       var uri = uriBase + 'users/' + username + '/library'
@@ -52,19 +53,22 @@
      */
     this.incrementEpisodesWatched = function (animeId) {
       if (animeId == null) {
-        // TODO: Return a failure using $q.
+        return $q.reject('The parameter "animeId" must not be null.')
       }
 
-      var uri = uriBase + 'libraryEntry'
+      if (!sessionService.hasSession()) {
+        return $q.reject('The user must be logged in.')
+      }
+
+      var uri = uriBase + 'libraryEntry/' + animeId
 
       var body = {
-        auth_token: sessionService.getAuthenticationToken()
-        animeId: animeId
+        auth_token: sessionService.getAuthenticationToken(),
+        increment_episodes: true
       }
 
       return $http.post(uri, body)
     }
-
   }
 
   angular.module('weebster').service('dataService', ['$http', '$q', 'sessionService', dataService])
