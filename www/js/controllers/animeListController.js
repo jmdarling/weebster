@@ -31,38 +31,55 @@
     $scope.selected = {}
     $scope.selected.libraryState = $scope.libraryStateOptions[1]
 
-    $scope.onSelectedLibraryStateChanged = function () {
+    function showLoadingIndicator () {
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
       })
-
-      dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
-        .then(function (response) {
-          $scope.libraryEntries = response.data
-          $ionicLoading.hide()
-        })
-        .catch(function (error) {
-          console.log(error)
-          $ionicLoading.hide()
-        })
     }
 
-    $ionicLoading.show({
-      template: '<p>Loading...</p><ion-spinner></ion-spinner>'
-    })
+    function hideLoadingIndicator () {
+      $ionicLoading.hide()
+    }
+
+    // Initialization
+    showLoadingIndicator()
 
     dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
       .then(function (response) {
         $scope.libraryEntries = response.data
-        $ionicLoading.hide()
       })
       .catch(function (error) {
         console.log(error)
-        $ionicLoading.hide()
       })
+      .finally(hideLoadingIndicator)
+
+    $scope.onSelectedLibraryStateChanged = function () {
+      showLoadingIndicator()
+
+      dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
+        .then(function (response) {
+          $scope.libraryEntries = response.data
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
+        .finally(hideLoadingIndicator)
+    }
 
     $scope.incrementWatched = function (animeId) {
+      showLoadingIndicator()
+
       dataService.incrementEpisodesWatched(animeId)
+        .then(function () {
+          dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
+            .then(function (response) {
+              $scope.libraryEntries = response.data
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+            .finally(hideLoadingIndicator)
+        })
     }
   }
 
