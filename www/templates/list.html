@@ -16,7 +16,7 @@
         <img ng-src="{{libraryEntry.anime.cover_image}}">
         <h2>{{libraryEntry.anime.title}}</h2>
         <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
-        <button class="button button-positive" ng-click="incrementWatched(libraryEntry.anime.id)"><i class="icon ion-plus-round"></i></button>
+        <button class="button button-positive" ng-click="incrementWatched(libraryEntry.anime.id)" ng-if="(libraryEntry.episodes_watched > libraryEntry.anime.episode_count) || libraryEntry.anime.episode_count == null"><i class="icon ion-plus-round"></i></button>
       </ion-item>
     </ion-list>
   </ion-content>
