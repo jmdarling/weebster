@@ -1,9 +1,19 @@
 /* global angular */
 (function () {
-  function loginController ($scope, $http, $state, sessionService) {
+  function loginController ($scope, $state, $ionicLoading, dataService, sessionService) {
     $scope.loginForm = {}
     $scope.loginForm.data = {}
     $scope.loginForm.errors = {}
+
+    function showLoadingIndicator () {
+      $ionicLoading.show({
+        template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+      })
+    }
+
+    function hideLoadingIndicator () {
+      $ionicLoading.hide()
+    }
 
     $scope.onUsernameChange = function () {
       // Remove validation errors if the user starts changing data
@@ -28,19 +38,22 @@
         return
       }
 
-      $http.post('https://weebster-server.herokuapp.com/authenticate', {
-        username: $scope.loginForm.data.username,
-        password: $scope.loginForm.data.password
-      })
-      .then(function (response) {
-        sessionService.startSession(response.data, $scope.loginForm.data.username)
-        $state.go('list')
-      })
-      .catch(function () {
-        $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
-      })
+      showLoadingIndicator()
+
+      dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
+        .then(function (response) {
+          sessionService.startSession(response.data, $scope.loginForm.data.username)
+          $state.go('list')
+        })
+        .catch(function (error) {
+          console.log(error)
+          $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
+        })
+        .finally(function () {
+          hideLoadingIndicator()
+        })
     }
   }
 
-  angular.module('weebster').controller('loginController', ['$scope', '$http', '$state', 'sessionService', loginController])
+  angular.module('weebster').controller('loginController', ['$scope', '$state', '$ionicLoading', 'dataService', 'sessionService', loginController])
 })()

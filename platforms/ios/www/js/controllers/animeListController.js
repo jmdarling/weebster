@@ -1,6 +1,6 @@
 /* globals angular */
 (function () {
-  function animeListController ($scope, $http, $state, $ionicLoading, sessionService) {
+  function animeListController ($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService) {
     $scope.libraryStateOptions = [
       {
         id: 'all',
@@ -31,53 +31,69 @@
     $scope.selected = {}
     $scope.selected.libraryState = $scope.libraryStateOptions[1]
 
-    $scope.onSelectedLibraryStateChanged = function () {
+    function showLoadingIndicator () {
       $ionicLoading.show({
         template: '<p>Loading...</p><ion-spinner></ion-spinner>'
       })
-
-      $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library?status=' + $scope.selected.libraryState.id)
-      .then(function (response) {
-        $scope.libraryEntries = response.data
-        $ionicLoading.hide()
-      })
-      .catch(function (error) {
-        console.log(error)
-        $ionicLoading.hide()
-      })
     }
 
-    $ionicLoading.show({
-      template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+    function hideLoadingIndicator () {
+      $ionicLoading.hide()
+    }
+
+    // Initialization
+    showLoadingIndicator()
+
+    $ionicModal.fromTemplateUrl('libraryEntryModel.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal
     })
 
-    $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library?status=' + $scope.selected.libraryState.id)
+    dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
       .then(function (response) {
         $scope.libraryEntries = response.data
-        $ionicLoading.hide()
       })
       .catch(function (error) {
         console.log(error)
-        $ionicLoading.hide()
       })
+      .finally(hideLoadingIndicator)
 
-    $scope.onRefresh = function () {
-      $http.get('https://weebster-server.herokuapp.com/users/' + sessionService.getUsername() + '/library')
+    $scope.onSelectedLibraryStateChanged = function () {
+      showLoadingIndicator()
+
+      dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
         .then(function (response) {
           $scope.libraryEntries = response.data
         })
         .catch(function (error) {
           console.log(error)
         })
+        .finally(hideLoadingIndicator)
     }
 
     $scope.incrementWatched = function (animeId) {
-      $http.post('https://weebster-server.herokuapp.com/libraryEntry/' + animeId, {
-        auth_token: sessionService.getAuthenticationToken(),
-        increment_episodes: true
-      })
+      showLoadingIndicator()
+
+      dataService.incrementEpisodesWatched(animeId)
+        .then(function () {
+          dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
+            .then(function (response) {
+              $scope.libraryEntries = response.data
+            })
+            .catch(function (error) {
+              console.log(error)
+            })
+            .finally(hideLoadingIndicator)
+        })
+    }
+
+    $scope.onLibraryEntryClicked = function (libraryEntry) {
+      $scope.selected.libraryEntry = libraryEntry
+      $scope.modal.show()
     }
   }
 
-  angular.module('weebster').controller('animeListController', ['$scope', '$http', '$state', '$ionicLoading', 'sessionService', animeListController])
+  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController])
 })()
