@@ -9704,6 +9704,9 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.library-entry-modal__watch-count {
+  font-size: 20px; }
+
 .login__logo {
   display: block;
   margin: 20px auto;

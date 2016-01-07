@@ -4,6 +4,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+.library-entry-modal__watch-count {
+  font-size: 20px;
+}
+
 .login__logo {
   display: block;
   margin: 20px auto;

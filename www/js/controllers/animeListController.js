@@ -44,7 +44,7 @@
     // Initialization
     showLoadingIndicator()
 
-    $ionicModal.fromTemplateUrl('libraryEntryModel.html', {
+    $ionicModal.fromTemplateUrl('templates/listItemModal.html', {
       scope: $scope,
       animation: 'slide-in-up'
     }).then(function (modal) {
@@ -89,10 +89,18 @@
         })
     }
 
-    $scope.onLibraryEntryClicked = function (libraryEntry) {
-      $scope.selected.libraryEntry = libraryEntry
+    $scope.onLibraryEntryClicked = function (libraryEntryIndex) {
+      $scope.selected.libraryEntryIndex = libraryEntryIndex
       $scope.modal.show()
     }
+
+    $scope.onModalDoneClicked = function () {
+      $scope.modal.hide()
+    }
+
+    $scope.$on('$destroy', function () {
+      $scope.modal.remove()
+    })
   }
 
   angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController])
