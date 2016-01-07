@@ -12,7 +12,7 @@
         </select>
       </ion-item>
 
-      <ion-item class="item-avatar item-button-right" ng-repeat="libraryEntry in libraryEntries">
+      <ion-item class="item-avatar item-button-right" ng-click="onLibraryEntryClicked(libraryEntry)" ng-repeat="libraryEntry in libraryEntries">
         <img ng-src="{{libraryEntry.anime.cover_image}}">
         <h2>{{libraryEntry.anime.title}}</h2>
         <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
@@ -21,3 +21,9 @@
     </ion-list>
   </ion-content>
 </ion-view>
+
+<script id="libraryEntryModel.html" type="text/ng-template">
+  <ion-modal-view>
+    <h3>{{selected.libraryEntry.anime.title}}</h3>
+  </ion-modal-view>
+</script>

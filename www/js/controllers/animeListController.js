@@ -1,6 +1,6 @@
 /* globals angular */
 (function () {
-  function animeListController ($scope, $state, $ionicLoading, dataService, sessionService) {
+  function animeListController ($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService) {
     $scope.libraryStateOptions = [
       {
         id: 'all',
@@ -44,6 +44,13 @@
     // Initialization
     showLoadingIndicator()
 
+    $ionicModal.fromTemplateUrl('libraryEntryModel.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function (modal) {
+      $scope.modal = modal
+    })
+
     dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
       .then(function (response) {
         $scope.libraryEntries = response.data
@@ -81,7 +88,12 @@
             .finally(hideLoadingIndicator)
         })
     }
+
+    $scope.onLibraryEntryClicked = function (libraryEntry) {
+      $scope.selected.libraryEntry = libraryEntry
+      $scope.modal.show()
+    }
   }
 
-  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', 'dataService', 'sessionService', animeListController])
+  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController])
 })()
