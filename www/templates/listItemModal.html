@@ -9,9 +9,7 @@
         <p class="library-entry-modal__watch-count">
           Seen {{libraryEntries[selected.libraryEntryIndex].episodes_watched}} of {{libraryEntries[selected.libraryEntryIndex].anime.episode_count || &quot;?&quot;}}
         </p>
-        <div class="row">
-          <button class="button button-positive" ng-click="incrementWatched(libraryEntries[selected.libraryEntryIndex].anime.id)" ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null"><i class="icon ion-plus-round"></i></button>
-        </div>
+          <button class="button button-block button-positive" ng-click="incrementWatched(libraryEntries[selected.libraryEntryIndex].anime.id)" ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null"><i class="icon ion-plus-round"></i></button>
       </div>
     </div>
     <button class="button button-full" ng-click="onModalDoneClicked()">Done</button>
