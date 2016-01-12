@@ -11,7 +11,10 @@
           ng-options="option.name for option in libraryStateOptions track by option.id">
         </select>
       </ion-item>
-      <ion-item class="item-avatar" ng-click="onLibraryEntryClicked($index)" ng-repeat="libraryEntry in libraryEntries">
+      <ion-item
+        class="item-avatar"
+        ng-click="onLibraryEntryClicked($index)"
+        ng-repeat="libraryEntry in libraryEntries">
         <img ng-src="{{libraryEntry.anime.cover_image}}">
         <h2>{{libraryEntry.anime.title}}</h2>
         <p>Seen {{libraryEntry.episodes_watched}} of {{libraryEntry.anime.episode_count || &quot;?&quot;}}</p>
