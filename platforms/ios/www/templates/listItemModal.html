@@ -5,12 +5,22 @@
   </ion-header-bar>
   <ion-content>
     <div class="row">
-      <img class="col col-50" ng-src="{{libraryEntries[selected.libraryEntryIndex].anime.cover_image}}">
+      <img
+        class="col col-50"
+        ng-src="{{libraryEntries[selected.libraryEntryIndex].anime.cover_image}}">
       <div class="col">
+        <p>
+          {{libraryEntries[selected.libraryEntryIndex].status}}
+        </p>
         <p class="library-entry-modal__watch-count">
           Seen {{libraryEntries[selected.libraryEntryIndex].episodes_watched}} of {{libraryEntries[selected.libraryEntryIndex].anime.episode_count || &quot;?&quot;}}
         </p>
-          <button class="button button-block button-positive" ng-click="incrementWatched(libraryEntries[selected.libraryEntryIndex].anime.id)" ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null"><i class="icon ion-plus-round"></i></button>
+          <button
+            class="button button-block button-positive"
+            ng-click="incrementWatched(libraryEntries[selected.libraryEntryIndex].anime.id)"
+            ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null">
+            <i class="icon ion-plus-round"></i>
+          </button>
       </div>
     </div>
     <p class="padding">{{libraryEntries[selected.libraryEntryIndex].anime.synopsis}}</p>
