@@ -1,6 +1,14 @@
 /* globals angular */
 (function () {
   function animeListController ($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService) {
+    $scope.statusMap = {
+      'currently-watching': 'Currently Watching',
+      'plan-to-watch': 'Plan to Watch',
+      'completed': 'Completed',
+      'oh-hold': 'On Hold',
+      'dropped': 'Dropped'
+    }
+
     $scope.libraryStateOptions = [
       {
         id: 'all',
