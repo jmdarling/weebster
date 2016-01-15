@@ -10,7 +10,7 @@
         ng-src="{{libraryEntries[selected.libraryEntryIndex].anime.cover_image}}">
       <div class="col">
         <p>
-          {{libraryEntries[selected.libraryEntryIndex].status}}
+          {{statusMap[libraryEntries[selected.libraryEntryIndex].status]}}
         </p>
         <p class="library-entry-modal__watch-count">
           Seen {{libraryEntries[selected.libraryEntryIndex].episodes_watched}} of {{libraryEntries[selected.libraryEntryIndex].anime.episode_count || &quot;?&quot;}}
