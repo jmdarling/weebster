@@ -21,6 +21,10 @@
             ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null">
             <i class="icon ion-plus-round"></i>
           </button>
+
+          <p ng-if="libraryEntries[selected.libraryEntryIndex].rating.value">
+            Rating: {{libraryEntries[selected.libraryEntryIndex].rating.value}}
+          </p>
       </div>
     </div>
     <p class="padding">{{libraryEntries[selected.libraryEntryIndex].anime.synopsis}}</p>
