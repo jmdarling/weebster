@@ -23,7 +23,9 @@
           </button>
 
           <p ng-if="libraryEntries[selected.libraryEntryIndex].rating.value">
-            Rating: {{libraryEntries[selected.libraryEntryIndex].rating.value}}
+            <i
+              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+              ng-repeat="star in getRatingStarsArray(libraryEntries[selected.libraryEntryIndex].rating.value) track by $index"></i>
           </p>
       </div>
     </div>
