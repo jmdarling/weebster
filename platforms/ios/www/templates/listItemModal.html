@@ -21,6 +21,20 @@
             ng-if="(libraryEntries[selected.libraryEntryIndex].episodes_watched < libraryEntries[selected.libraryEntryIndex].anime.episode_count) || libraryEntries[selected.libraryEntryIndex].anime.episode_count == null">
             <i class="icon ion-plus-round"></i>
           </button>
+
+          <p ng-if="libraryEntries[selected.libraryEntryIndex].rating.value">
+            Your Rating:
+            <i
+              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+              ng-repeat="star in getRatingStarsArray(libraryEntries[selected.libraryEntryIndex].rating.value) track by $index"></i>
+          </p>
+
+          <p ng-if="libraryEntries[selected.libraryEntryIndex].anime.community_rating">
+            Community Rating:
+            <i
+              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+              ng-repeat="star in getRatingStarsArray(libraryEntries[selected.libraryEntryIndex].anime.community_rating) track by $index"></i>
+          </p>
       </div>
     </div>
     <p class="padding">{{libraryEntries[selected.libraryEntryIndex].anime.synopsis}}</p>

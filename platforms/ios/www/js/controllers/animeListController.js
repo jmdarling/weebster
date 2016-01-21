@@ -109,6 +109,32 @@
     $scope.$on('$destroy', function () {
       $scope.modal.remove()
     })
+
+    $scope.getRatingStarsArray = function (rating) {
+      var starsArray = []
+
+      var fullStars = Math.floor(rating)
+      var hasHalfStar = (rating % 1) > 0.25
+
+      var iteration = 0
+
+      while (iteration < fullStars) {
+        starsArray[iteration] = 1
+        iteration += 1
+      }
+
+      if (hasHalfStar) {
+        starsArray[iteration] = 0.5
+        iteration += 1
+      }
+
+      while (iteration < 5) {
+        starsArray[iteration] = 0
+        iteration += 1
+      }
+
+      return starsArray
+    }
   }
 
   angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController])
