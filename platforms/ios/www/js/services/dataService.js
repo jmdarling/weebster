@@ -69,6 +69,37 @@
 
       return $http.post(uri, body)
     }
+
+    /**
+     *  Changes the status for the provided anime. Requires the user to be
+     *  authenticated.
+     *
+     *  @param animeId The anime that will have its status updated.
+     *  @param status  The status to update the anime to. One of:
+     *                  currently-watching
+     *                  plan-to-watch
+     *                  completed
+     *                  on-hold
+     *                  dropped
+     */
+    this.changeStatus = function (animeId, status) {
+      if (animeId == null) {
+        return $q.reject('The parameter "animeId" must not be null.')
+      }
+
+      if (status == null) {
+        return $q.reject('The parameter "status" must not be null.')
+      }
+
+      var uri = uriBase + 'libraryEntry/' + animeId
+
+      var body = {
+        auth_token: sessionService.getAuthenticationToken(),
+        status: status
+      }
+
+      return $http.post(uri, body)
+    }
   }
 
   angular.module('weebster').service('dataService', ['$http', '$q', 'sessionService', dataService])
