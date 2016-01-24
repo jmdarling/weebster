@@ -48,6 +48,7 @@
         .catch(function (error) {
           console.log(error)
           $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
+          $scope.loginForm.data.pasword = null
         })
         .finally(function () {
           hideLoadingIndicator()
