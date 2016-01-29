@@ -91,6 +91,10 @@
         return $q.reject('The parameter "status" must not be null.')
       }
 
+      if (!sessionService.hasSession()) {
+        return $q.reject('The user must be logged in.')
+      }
+
       var uri = uriBase + 'libraryEntry/' + animeId
 
       var body = {
