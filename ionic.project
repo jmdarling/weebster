@@ -2,6 +2,7 @@
   "name": "weebster",
   "app_id": "f8aafef2",
   "gulpStartupTasks": [
+    "babel",
     "sass",
     "watch"
   ],
