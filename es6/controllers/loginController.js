@@ -41,16 +41,16 @@
       showLoadingIndicator()
 
       dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
-        .then(function (response) {
+        .then(response => {
           sessionService.startSession(response.data, $scope.loginForm.data.username)
           $state.go('list')
         })
-        .catch(function (error) {
+        .catch(error => {
           console.log(error)
           $scope.loginForm.errors.serverValidationError = 'Your username password combination is incorrect.'
           $scope.loginForm.data.pasword = null
         })
-        .finally(function () {
+        .finally(() => {
           hideLoadingIndicator()
         })
     }
