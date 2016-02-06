@@ -1,6 +1,6 @@
 /* global angular */
 (function () {
-  function loginController ($scope, $state, $ionicLoading, dataService, sessionService) {
+  function loginController ($scope, $state, $ionicLoading, $ionicHistory, dataService, sessionService) {
     $scope.loginForm = {}
     $scope.loginForm.data = {}
     $scope.loginForm.errors = {}
@@ -43,6 +43,11 @@
       dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
         .then(response => {
           sessionService.startSession(response.data, $scope.loginForm.data.username)
+
+          $ionicHistory.nextViewOptions({
+            disableBack: true,
+            historyRoot: true
+          })
           $state.go('anime')
         })
         .catch(error => {
@@ -56,5 +61,5 @@
     }
   }
 
-  angular.module('weebster').controller('loginController', ['$scope', '$state', '$ionicLoading', 'dataService', 'sessionService', loginController])
+  angular.module('weebster').controller('loginController', ['$scope', '$state', '$ionicLoading', '$ionicHistory', 'dataService', 'sessionService', loginController])
 })()
