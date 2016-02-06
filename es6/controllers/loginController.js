@@ -43,7 +43,7 @@
       dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
         .then(response => {
           sessionService.startSession(response.data, $scope.loginForm.data.username)
-          $state.go('list')
+          $state.go('anime')
         })
         .catch(error => {
           console.log(error)

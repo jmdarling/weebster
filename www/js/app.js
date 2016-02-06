@@ -4,11 +4,11 @@
 var app = angular.module('weebster', ['ionic']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider.state('list', {
-    url: '/list',
+  $stateProvider.state('anime', {
+    url: '/anime',
     templateUrl: 'templates/list.html'
   }).state('animeDetail', {
-    url: '/animeDetail',
+    url: '/detail',
     templateUrl: 'templates/animeDetail.html',
     params: { libraryEntry: null }
   }).state('login', {
@@ -16,7 +16,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/login.html'
   });
 
-  $urlRouterProvider.otherwise('/list');
+  $urlRouterProvider.otherwise('/anime');
 });
 
 app.run(function ($ionicPlatform, $rootScope, $state, sessionService) {
@@ -43,7 +43,7 @@ app.run(function ($ionicPlatform, $rootScope, $state, sessionService) {
     if (toState.url === '/login') {
       if (sessionService.hasSession()) {
         event.preventDefault();
-        $state.go('list');
+        $state.go('anime');
       } else {
         return;
       }
