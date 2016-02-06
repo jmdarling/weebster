@@ -98,8 +98,9 @@
     }
 
     $scope.onLibraryEntryClicked = function (libraryEntryIndex) {
-      $scope.selected.libraryEntryIndex = libraryEntryIndex
-      $scope.modal.show()
+      $state.go('animeDetail', {
+        libraryEntry: $scope.libraryEntries[libraryEntryIndex]
+      })
     }
 
     $scope.onModalDoneClicked = function () {

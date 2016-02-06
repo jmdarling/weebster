@@ -1,11 +1,16 @@
 /* globals angular */
 var app = angular.module('weebster', ['ionic'])
 
-app.config(function ($stateProvider, $urlRouterProvider) {
+app.config(($stateProvider, $urlRouterProvider) => {
   $stateProvider
     .state('list', {
       url: '/list',
       templateUrl: 'templates/list.html'
+    })
+    .state('animeDetail', {
+      url: '/animeDetail',
+      templateUrl: 'templates/animeDetail.html',
+      params: { libraryEntry: null }
     })
     .state('login', {
       url: '/login',

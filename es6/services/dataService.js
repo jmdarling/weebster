@@ -46,6 +46,19 @@
     }
 
     /**
+     * Gets a specific anime.
+     * @param  {string} animeId The ID of the anime to get.
+     * @return {object}         A promise containing the http response.
+     */
+    this.getAnime = (animeId) => {
+      if (animeId == null) {
+        return $q.reject('The parameter "animeId" must not be null.')
+      }
+
+      return $http.get(`anime/${animeId}`)
+    }
+
+    /**
      *  Increments the episodes watched count for the provided anime. Requires
      *  the user to be authenticated.
      *
