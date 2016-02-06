@@ -47,13 +47,6 @@
     // Initialization
     showLoadingIndicator();
 
-    $ionicModal.fromTemplateUrl('templates/listItemModal.html', {
-      scope: $scope,
-      animation: 'slide-in-up'
-    }).then(function (modal) {
-      $scope.modal = modal;
-    });
-
     dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id).then(function (response) {
       $scope.libraryEntries = response.data;
     }).catch(function (error) {
@@ -70,31 +63,11 @@
       }).finally(hideLoadingIndicator);
     };
 
-    $scope.incrementWatched = function (animeId) {
-      showLoadingIndicator();
-
-      dataService.incrementEpisodesWatched(animeId).then(function () {
-        dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id).then(function (response) {
-          $scope.libraryEntries = response.data;
-        }).catch(function (error) {
-          console.log(error);
-        }).finally(hideLoadingIndicator);
-      });
-    };
-
     $scope.onLibraryEntryClicked = function (libraryEntryIndex) {
       $state.go('animeDetail', {
         libraryEntry: $scope.libraryEntries[libraryEntryIndex]
       });
     };
-
-    $scope.onModalDoneClicked = function () {
-      $scope.modal.hide();
-    };
-
-    $scope.$on('$destroy', function () {
-      $scope.modal.remove();
-    });
 
     $scope.getRatingStarsArray = function (rating) {
       var starsArray = [];
