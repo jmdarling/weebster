@@ -1,6 +1,6 @@
 /* globals angular */
 (function () {
-  function animeListController ($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService) {
+  function animeListController ($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService, listItemUpdateService) {
     $scope.statusMap = {
       'currently-watching': 'Currently Watching',
       'plan-to-watch': 'Plan to Watch',
@@ -61,6 +61,15 @@
       })
       .finally(hideLoadingIndicator)
 
+    // Subscribe for external list item updates.
+    listItemUpdateService.subscribe((listItem) => {
+      let updatedIndex = $scope.libraryEntries.findIndex((element) => {
+        return element.id === listItem.id
+      })
+
+      $scope.libraryEntries[updatedIndex] = listItem
+    })
+
     $scope.onSelectedLibraryStateChanged = function () {
       showLoadingIndicator()
 
@@ -107,5 +116,5 @@
     }
   }
 
-  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController])
+  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', 'listItemUpdateService', animeListController])
 })()

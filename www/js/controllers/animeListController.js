@@ -2,7 +2,7 @@
 
 /* globals angular */
 (function () {
-  function animeListController($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService) {
+  function animeListController($scope, $state, $ionicLoading, $ionicModal, dataService, sessionService, listItemUpdateService) {
     $scope.statusMap = {
       'currently-watching': 'Currently Watching',
       'plan-to-watch': 'Plan to Watch',
@@ -53,6 +53,15 @@
       console.log(error);
     }).finally(hideLoadingIndicator);
 
+    // Subscribe for external list item updates.
+    listItemUpdateService.subscribe(function (listItem) {
+      var updatedIndex = $scope.libraryEntries.findIndex(function (element) {
+        return element.id === listItem.id;
+      });
+
+      $scope.libraryEntries[updatedIndex] = listItem;
+    });
+
     $scope.onSelectedLibraryStateChanged = function () {
       showLoadingIndicator();
 
@@ -96,5 +105,5 @@
     };
   }
 
-  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', animeListController]);
+  angular.module('weebster').controller('animeListController', ['$scope', '$state', '$ionicLoading', '$ionicModal', 'dataService', 'sessionService', 'listItemUpdateService', animeListController]);
 })();
