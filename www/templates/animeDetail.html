@@ -33,6 +33,12 @@
         </p>
       </div>
     </div>
+    <div class="anime-detail__genres__wrapper">
+      <ul class="anime-detail__genres">
+          <li class="anime-detail__genres__genre" ng-repeat="genre in libraryEntry.anime.genres">{{genre.name}}</li>
+      </ul>
+    </div>
+
     <p class="padding">
       {{libraryEntry.anime.synopsis}}
     </p>

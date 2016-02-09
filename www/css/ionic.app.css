@@ -9704,6 +9704,24 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
+.anime-detail__genres {
+  display: flex;
+  margin-left: -2px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: space-between; }
+
+.anime-detail__genres__genre {
+  border-left: 1px solid #cccccc;
+  color: #777777;
+  flex-basis: auto;
+  flex-grow: 1;
+  text-align: center;
+  padding: 0 5px; }
+
+.anime-detail__genres__wrapper {
+  overflow: hidden; }
+
 .anime-detail__watch-count {
   font-size: 20px;
   text-align: center;
