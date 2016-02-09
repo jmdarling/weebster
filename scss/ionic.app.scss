@@ -4,8 +4,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
-.library-entry-modal__watch-count {
+.anime-detail__watch-count {
   font-size: 20px;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 .login__logo {
@@ -17,4 +19,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 .text-center  {
     text-align: center;
+}
+
+.stars-rating {
+  text-align: center;
+}
+
+.stars-rating__stars {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stars-rating__stars > i {
+  color: #FFCA40;
+  font-size: 25px;
 }
