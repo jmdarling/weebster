@@ -9704,8 +9704,28 @@ a.button {
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
 
-.library-entry-modal__watch-count {
-  font-size: 20px; }
+.anime-detail__genres {
+  display: flex;
+  margin-left: -2px;
+  flex-wrap: wrap;
+  overflow: hidden;
+  justify-content: space-between; }
+
+.anime-detail__genres__genre {
+  border-left: 1px solid #cccccc;
+  color: #777777;
+  flex-basis: auto;
+  flex-grow: 1;
+  text-align: center;
+  padding: 0 5px; }
+
+.anime-detail__genres__wrapper {
+  overflow: hidden; }
+
+.anime-detail__watch-count {
+  font-size: 20px;
+  text-align: center;
+  margin-bottom: 0; }
 
 .login__logo {
   display: block;
@@ -9715,3 +9735,14 @@ a.button {
 
 .text-center {
   text-align: center; }
+
+.stars-rating {
+  text-align: center; }
+
+.stars-rating__stars {
+  display: flex;
+  justify-content: space-around; }
+
+.stars-rating__stars > i {
+  color: #FFCA40;
+  font-size: 30px; }

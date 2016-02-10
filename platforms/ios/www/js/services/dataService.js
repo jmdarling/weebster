@@ -1,7 +1,9 @@
+'use strict';
+
 /* globals angular */
 (function () {
-  function dataService ($http, $q, sessionService) {
-    var uriBase = 'https://weebster-server.herokuapp.com/'
+  function dataService($http, $q, sessionService) {
+    var uriBase = 'https://weebster-server.herokuapp.com/';
 
     /**
      *  Attempts to authenticate a user.
@@ -11,18 +13,18 @@
      */
     this.authenticateUser = function (username, password) {
       if (username == null || password == null) {
-        return $q.reject('The parameters "username" and "password" must not be null.')
+        return $q.reject('The parameters "username" and "password" must not be null.');
       }
 
-      var uri = uriBase + 'authenticate'
+      var uri = uriBase + 'authenticate';
 
       var body = {
         username: username,
         password: password
-      }
+      };
 
-      return $http.post(uri, body)
-    }
+      return $http.post(uri, body);
+    };
 
     /**
      *  Fetches a user's library.
@@ -33,17 +35,30 @@
      */
     this.getUserLibrary = function (username, status) {
       if (username == null) {
-        return $q.reject('The parameter "username" must not be null.')
+        return $q.reject('The parameter "username" must not be null.');
       }
 
-      var uri = uriBase + 'users/' + username + '/library'
+      var uri = uriBase + 'users/' + username + '/library';
 
       if (status != null) {
-        uri += '?status=' + status
+        uri += '?status=' + status;
       }
 
-      return $http.get(uri)
-    }
+      return $http.get(uri);
+    };
+
+    /**
+     * Gets a specific anime.
+     * @param  {string} animeId The ID of the anime to get.
+     * @return {object}         A promise containing the http response.
+     */
+    this.getAnime = function (animeId) {
+      if (animeId == null) {
+        return $q.reject('The parameter "animeId" must not be null.');
+      }
+
+      return $http.get('anime/' + animeId);
+    };
 
     /**
      *  Increments the episodes watched count for the provided anime. Requires
@@ -53,22 +68,22 @@
      */
     this.incrementEpisodesWatched = function (animeId) {
       if (animeId == null) {
-        return $q.reject('The parameter "animeId" must not be null.')
+        return $q.reject('The parameter "animeId" must not be null.');
       }
 
       if (!sessionService.hasSession()) {
-        return $q.reject('The user must be logged in.')
+        return $q.reject('The user must be logged in.');
       }
 
-      var uri = uriBase + 'libraryEntry/' + animeId
+      var uri = uriBase + 'libraryEntry/' + animeId;
 
       var body = {
         auth_token: sessionService.getAuthenticationToken(),
         increment_episodes: true
-      }
+      };
 
-      return $http.post(uri, body)
-    }
+      return $http.post(uri, body);
+    };
 
     /**
      *  Changes the status for the provided anime. Requires the user to be
@@ -84,27 +99,27 @@
      */
     this.changeStatus = function (animeId, status) {
       if (animeId == null) {
-        return $q.reject('The parameter "animeId" must not be null.')
+        return $q.reject('The parameter "animeId" must not be null.');
       }
 
       if (status == null) {
-        return $q.reject('The parameter "status" must not be null.')
+        return $q.reject('The parameter "status" must not be null.');
       }
 
       if (!sessionService.hasSession()) {
-        return $q.reject('The user must be logged in.')
+        return $q.reject('The user must be logged in.');
       }
 
-      var uri = uriBase + 'libraryEntry/' + animeId
+      var uri = uriBase + 'libraryEntry/' + animeId;
 
       var body = {
         auth_token: sessionService.getAuthenticationToken(),
         status: status
-      }
+      };
 
-      return $http.post(uri, body)
-    }
+      return $http.post(uri, body);
+    };
   }
 
-  angular.module('weebster').service('dataService', ['$http', '$q', 'sessionService', dataService])
-})()
+  angular.module('weebster').service('dataService', ['$http', '$q', 'sessionService', dataService]);
+})();

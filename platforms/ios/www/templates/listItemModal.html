@@ -12,7 +12,7 @@
         <p>
           {{statusMap[libraryEntries[selected.libraryEntryIndex].status]}}
         </p>
-        <select ng-model="currentStatus" ng-options="v for (k, v) in statusMap"></select>
+        <select ng-model="statusMap[libraryEntries[selected.libraryEntryIndex].status]" ng-options="value for (key, value) in statusMap"></select>
         <p class="library-entry-modal__watch-count">
           Seen {{libraryEntries[selected.libraryEntryIndex].episodes_watched}} of {{libraryEntries[selected.libraryEntryIndex].anime.episode_count || &quot;?&quot;}}
         </p>
@@ -23,11 +23,13 @@
             <i class="icon ion-plus-round"></i>
           </button>
 
-          <p ng-if="libraryEntries[selected.libraryEntryIndex].rating.value">
-            Your Rating:</br>
-            <i
-              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
-              ng-repeat="star in getRatingStarsArray(libraryEntries[selected.libraryEntryIndex].rating.value) track by $index"></i>
+          <p class="stars-rating" ng-if="libraryEntries[selected.libraryEntryIndex].rating.value">
+            <span class="stars-rating__caption">Your Rating:</span>
+            <span class="stars-rating__stars">
+              <i
+                ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+                ng-repeat="star in getRatingStarsArray(libraryEntries[selected.libraryEntryIndex].rating.value) track by $index"></i>
+            </span>
           </p>
 
           <p ng-if="libraryEntries[selected.libraryEntryIndex].anime.community_rating">

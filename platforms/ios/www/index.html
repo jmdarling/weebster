@@ -19,14 +19,18 @@
 
     <!-- controllers -->
     <script src="js/controllers/animeListController.js"></script>
+    <script src="js/controllers/animeDetailController.js"></script>
     <script src="js/controllers/loginController.js"></script>
 
     <!-- services -->
     <script src="js/services/dataService.js"></script>
     <script src="js/services/sessionService.js"></script>
+    <script src="js/services/listItemUpdateService.js"></script>
   </head>
   <body ng-app="weebster" class="platform-ios platform-cordova platform-webview">
-    <ion-nav-bar></ion-nav-bar>
+    <ion-nav-bar>
+      <ion-nav-back-button></ion-nav-back-button>
+    </ion-nav-bar>
     <ion-nav-view></ion-nav-view>
   </body>
 </html>

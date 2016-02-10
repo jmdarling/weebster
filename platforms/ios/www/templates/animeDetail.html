@@ -1,0 +1,46 @@
+<ion-view ng-controller="animeDetailController" view-title="{{libraryEntry.anime.title}}">
+  <ion-content>
+
+    <div class="row">
+      <img
+        class="col col-50"
+        ng-src="{{libraryEntry.anime.cover_image}}"/>
+
+      <div class="col">
+        <div class="row">
+          <p class="anime-detail__watch-count col col-75 col-center">
+            {{libraryEntry.episodes_watched}} / {{libraryEntry.anime.episode_count || &quot;?&quot;}}
+          </p>
+          <button class="button button-icon icon ion-plus col" ng-click="incrementWatchCount()"></button>
+        </div>
+
+        <p class="stars-rating" ng-if="libraryEntry.rating.value">
+          <span class="stars-rating__caption">Your Rating</span>
+          <span class="stars-rating__stars">
+            <i
+              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+              ng-repeat="star in buildRatingStarsArray(libraryEntry.rating.value) track by $index"></i>
+          </span>
+        </p>
+
+        <p class="stars-rating" ng-if="libraryEntry.anime.community_rating">
+          <span class="stars-rating__caption">Community Rating</span>
+          <span class="stars-rating__stars">
+            <i
+              ng-class="{'ion-ios-star': star === 1, 'ion-ios-star-half': star === 0.5, 'ion-ios-star-outline': star === 0}"
+              ng-repeat="star in buildRatingStarsArray(libraryEntry.anime.community_rating) track by $index"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="anime-detail__genres__wrapper">
+      <ul class="anime-detail__genres">
+          <li class="anime-detail__genres__genre" ng-repeat="genre in libraryEntry.anime.genres">{{genre.name}}</li>
+      </ul>
+    </div>
+
+    <p class="padding">
+      {{libraryEntry.anime.synopsis}}
+    </p>
+  </ion-content>
+</ion-view>

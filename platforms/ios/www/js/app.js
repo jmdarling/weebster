@@ -1,19 +1,23 @@
+'use strict';
+
 /* globals angular */
-var app = angular.module('weebster', ['ionic'])
+var app = angular.module('weebster', ['ionic']);
 
 app.config(function ($stateProvider, $urlRouterProvider) {
-  $stateProvider
-    .state('list', {
-      url: '/list',
-      templateUrl: 'templates/list.html'
-    })
-    .state('login', {
-      url: '/login',
-      templateUrl: 'templates/login.html'
-    })
+  $stateProvider.state('anime', {
+    url: '/anime',
+    templateUrl: 'templates/list.html'
+  }).state('animeDetail', {
+    url: '/detail',
+    templateUrl: 'templates/animeDetail.html',
+    params: { libraryEntry: null }
+  }).state('login', {
+    url: '/login',
+    templateUrl: 'templates/login.html'
+  });
 
-  $urlRouterProvider.otherwise('/list')
-})
+  $urlRouterProvider.otherwise('/anime');
+});
 
 app.run(function ($ionicPlatform, $rootScope, $state, sessionService) {
   // Ionic bootstrapping
@@ -21,36 +25,36 @@ app.run(function ($ionicPlatform, $rootScope, $state, sessionService) {
     if (window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
-      window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true)
+      window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
       // Don't remove this line unless you know what you are doing. It stops the viewport
       // from snapping when text inputs are focused. Ionic handles this internally for
       // a much nicer keyboard experience.
-      window.cordova.plugins.Keyboard.disableScroll(true)
+      window.cordova.plugins.Keyboard.disableScroll(true);
     }
     if (window.StatusBar) {
-      window.StatusBar.styleDefault()
+      window.StatusBar.styleDefault();
     }
-  })
+  });
 
   // Authorization
   $rootScope.$on('$stateChangeStart', function (event, toState) {
     // Handle login redirect
     if (toState.url === '/login') {
       if (sessionService.hasSession()) {
-        event.preventDefault()
-        $state.go('list')
+        event.preventDefault();
+        $state.go('anime');
       } else {
-        return
+        return;
       }
     }
 
     // Handle all other redirects
     if (sessionService.hasSession()) {
-      return
+      return;
     }
 
-    event.preventDefault()
-    $state.go('login')
-  })
-})
+    event.preventDefault();
+    $state.go('login');
+  });
+});
