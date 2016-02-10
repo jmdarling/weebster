@@ -59,7 +59,12 @@
         return element.id === listItem.id;
       });
 
-      $scope.libraryEntries[updatedIndex] = listItem;
+      // If the status has changed, remove it from the current view.
+      if (listItem.status !== $scope.selected.libraryState.id) {
+        $scope.libraryEntries.splice(updatedIndex, 1);
+      } else {
+        $scope.libraryEntries[updatedIndex] = listItem;
+      }
     });
 
     $scope.onSelectedLibraryStateChanged = function () {
