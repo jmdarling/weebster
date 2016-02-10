@@ -14,6 +14,24 @@
       $ionicLoading.hide()
     }
 
+    $scope.changeStatus = () => {
+      showLoadingIndicator()
+
+      dataService.changeStatus($scope.libraryEntry.anime.id, $scope.libraryEntry.status)
+        .then(response => {
+          listItemUpdateService.update($scope.libraryEntry)
+        })
+        .catch((error) => {
+          console.log(`Error occurred in $scope.changeStatus: ${JSON.stringify(error)}`)
+
+          $ionicPopup.alert({
+            title: 'Update Error',
+            template: 'There was a problem updating this anime, please try again later.'
+          })
+        })
+        .finally(hideLoadingIndicator)
+    }
+
     $scope.incrementWatchCount = () => {
       showLoadingIndicator()
 
@@ -22,7 +40,9 @@
           listItemUpdateService.update($scope.libraryEntry)
           $scope.libraryEntry.episodes_watched += 1
         })
-        .catch(() => {
+        .catch((error) => {
+          console.log(`Error occurred in $scope.incrementWatchCount: ${JSON.stringify(error)}`)
+
           $ionicPopup.alert({
             title: 'Update Error',
             template: 'There was a problem updating this anime, please try again later.'

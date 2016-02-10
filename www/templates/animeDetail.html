@@ -1,6 +1,21 @@
 <ion-view ng-controller="animeDetailController" view-title="{{libraryEntry.anime.title}}">
   <ion-content>
 
+    <ion-item class="item-input item-select">
+      <div class="input-label">
+        Status
+      </div>
+      <select
+        ng-change="changeStatus()"
+        ng-model="libraryEntry.status">
+        <option value="currently-watching">Currently Watching</option>
+        <option value="plan-to-watch">Plan to Watch</option>
+        <option value="completed">Completed</option>
+        <option value="on-hold">On Hold</option>
+        <option value="dropped">Dropped</option>
+      </select>
+    </ion-item>
+
     <div class="row">
       <img
         class="col col-50"
