@@ -45,10 +45,10 @@
     showLoadingIndicator()
 
     dataService.getUserLibrary(sessionService.getUsername(), $scope.selected.libraryState.id)
-      .then(function (response) {
+      .then(response => {
         $scope.libraryEntries = response.data
       })
-      .catch(function (error) {
+      .catch(error => {
         console.log(error)
       })
       .finally(hideLoadingIndicator)
