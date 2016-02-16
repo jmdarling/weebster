@@ -9,7 +9,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/list.html'
   }).state('animeDetail', {
     url: '/detail',
-    templateUrl: 'templates/animeDetail.html',
+    templateUrl: 'templates/detail.html',
     params: { libraryEntry: null }
   }).state('login', {
     url: '/login',
