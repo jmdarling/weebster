@@ -40,7 +40,7 @@
 
       showLoadingIndicator()
 
-      dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password)
+      dataService.authenticateUser($scope.loginForm.data.username.trim(), $scope.loginForm.data.password)
         .then(response => {
           sessionService.startSession(response.data, $scope.loginForm.data.username)
 
