@@ -42,7 +42,7 @@
 
       showLoadingIndicator();
 
-      dataService.authenticateUser($scope.loginForm.data.username, $scope.loginForm.data.password).then(function (response) {
+      dataService.authenticateUser($scope.loginForm.data.username.trim(), $scope.loginForm.data.password).then(function (response) {
         sessionService.startSession(response.data, $scope.loginForm.data.username);
 
         $ionicHistory.nextViewOptions({
