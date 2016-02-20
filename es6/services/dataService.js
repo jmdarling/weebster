@@ -9,7 +9,7 @@
      *  @param username The user's username.
      *  @param password The user's password.
      */
-    this.authenticateUser = function (username, password) {
+    this.authenticateUser = (username, password) => {
       if (username == null || password == null) {
         return $q.reject('The parameters "username" and "password" must not be null.')
       }
@@ -31,7 +31,7 @@
      *  @param status   The anime status to retrieve (currently-watching,
      *                  completed, etc.)
      */
-    this.getUserLibrary = function (username, status) {
+    this.getUserLibrary = (username, status) => {
       if (username == null) {
         return $q.reject('The parameter "username" must not be null.')
       }
@@ -50,7 +50,7 @@
      * @param  {string} animeId The ID of the anime to get.
      * @return {object}         A promise containing the http response.
      */
-    this.getAnime = (animeId) => {
+    this.getAnime = animeId => {
       if (animeId == null) {
         return $q.reject('The parameter "animeId" must not be null.')
       }
@@ -64,7 +64,7 @@
      *
      *  @param animeId The anime to be incremented.
      */
-    this.incrementEpisodesWatched = function (animeId) {
+    this.incrementEpisodesWatched = animeId => {
       if (animeId == null) {
         return $q.reject('The parameter "animeId" must not be null.')
       }
@@ -95,7 +95,7 @@
      *                  on-hold
      *                  dropped
      */
-    this.changeStatus = function (animeId, status) {
+    this.changeStatus = (animeId, status) => {
       if (animeId == null) {
         return $q.reject('The parameter "animeId" must not be null.')
       }
