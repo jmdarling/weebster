@@ -4,6 +4,8 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
 
+$highlight-color: #FFCA40;
+
 .anime-detail__genres {
   display: flex;
   margin-left: -2px;
@@ -31,6 +33,10 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   margin-bottom: 0;
 }
 
+.item-highlight {
+  border-right: 10px solid $highlight-color;
+}
+
 .login__logo {
   display: block;
   margin: 20px auto;
@@ -52,6 +58,6 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .stars-rating__stars > i {
-  color: #FFCA40;
+  color: $highlight-color;
   font-size: 30px;
 }
