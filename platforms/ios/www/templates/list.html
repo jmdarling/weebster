@@ -13,6 +13,7 @@
       </ion-item>
       <ion-item
         class="item-avatar"
+        ng-class="{'item-highlight': libraryEntry.anime.status === 'Currently Airing'}"
         ng-click="onLibraryEntryClicked($index)"
         ng-repeat="libraryEntry in libraryEntries">
         <img ng-src="{{libraryEntry.anime.cover_image}}">
